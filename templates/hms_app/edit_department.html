@@ -1,0 +1,27 @@
+{% extends 'hms_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    {% if edited %}
+    <h1>You've successfully edited the department's details!</h1>
+    {% elif deleted %}
+    <h1>You've deleted a department.</h1>
+    {% elif removed %}
+    <h1>You've removed the head.</h1>
+    {% else %}
+    <h1 class="display-4">Edit Department</h1>
+    <p class="lead">{{ department.department_name }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ department_form.as_p }}
+        <input type="submit" value="Edit">
+    </form>
+    <p></p>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'hms_app:remove_head' department.id %}" role="button">Remove Head</a>
+    <p></p>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'hms_app:delete_department' department.id %}"
+        role="button">Delete Department</a>
+    {% endif %}
+</div>
+{% endblock %}

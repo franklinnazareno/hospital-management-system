@@ -1,0 +1,20 @@
+{% extends 'hms_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    {% if appointed %}
+    <h1>Thank you for making your appointment!</h1>
+    <p class="lead">Please wait for the approval of your appointment.</p>
+    {% else %}
+    <h1 class="display-4">Appointment Form</h1>
+    <p class="lead">Fill out the necessary fields to appoint.</p>
+    <hr class="my-4">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ appointment_form.as_p }}
+        <input type="submit" value="Appoint">
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

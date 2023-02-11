@@ -1,0 +1,29 @@
+{% extends "hms_app/base.html" %}
+{% block body_block %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        {% if deleted %}
+        <h1>You've deleted a patient.</h1>
+        {% elif patient_list %}
+        <h1 class="display-4">List of Patients</h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th>Patient Name</th>
+                <th>Sex</th>
+                <th>E-mail</th>
+            </thead>
+            {% for pat in patient_list %}
+            <tr>
+                <td><a class="btn btn-outline-danger btn-sm" href="{% url 'hms_app:delete_patient' pat.id %}" role="button">Delete</a> <a href="{% url 'hms_app:view_patient_profile' pat.id %}">{{ pat.user.last_name }}, {{ pat.user.first_name }}</a></td>
+                <td>{{ pat.sex }}</td>
+                <td>{{ pat.user.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1 class="display-4">There are no patients</h1>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

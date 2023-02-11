@@ -1,0 +1,19 @@
+{% extends 'hms_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    {% if added %}
+    <h1>You've successfully added another department!</h1>
+    {% else %}
+    <h1 class="display-4">Add a department</h1>
+    <p class="lead">Fill out the necessary fields to add a department.</p>
+    <hr class="my-4">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ dept_form.as_p }}
+        <input type="submit" value="Add Department">
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

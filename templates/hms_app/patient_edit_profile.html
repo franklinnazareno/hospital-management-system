@@ -1,0 +1,21 @@
+{% extends 'hms_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    {% if edited %}
+    <h1>You've successfully edited your profile!</h1>
+    {% else %}
+    <h1 class="display-4">Edit Profile</h1>
+    <hr class="my-4">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'hms_app:change_password' %}" role="button">Change Password</a>
+        <p></p>
+        {{ patient_form.as_p }}
+        <input type="submit" value="Update Profile">
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

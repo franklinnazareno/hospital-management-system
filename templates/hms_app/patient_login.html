@@ -1,0 +1,18 @@
+{% extends 'hms_app/base.html' %}
+{% block body_block %}
+
+<div class="jumbotron">
+    <h1 class="display-4">Patient Login</h1>
+    <p class="lead">Fill out the necessary fields to login.</p>
+    <hr class="my-4">
+    <form action="{% url 'hms_app:patient_login' %}" method="post">
+        {% csrf_token %}
+        <label for="patient_username">Username:</label>
+        <input type="text" name="patient_username" placeholder="Enter Username">
+        <label for="patient_password">Password:</label>
+        <input type="password" name="patient_password">
+        <input type="submit" value="Log In">
+    </form>
+</div>
+
+{% endblock %}

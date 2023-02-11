@@ -1,0 +1,23 @@
+{% extends 'hms_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    {% if edited %}
+    <h1>You've successfully edited the doctor's profile!</h1>
+    {% elif deleted %}
+    <h1>You've deleted the doctor.</h1>
+    {% else %}
+    <h1 class="display-4">Edit Doctor</h1>
+    <p class="lead">Dr. {{ doctor.user.first_name }} {{ doctor.user.last_name }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ doctor_form.as_p }}
+        <input type="submit" value="Edit">
+        <p></p>
+        <a class="btn btn-outline-danger btn-sm" href="{% url 'hms_app:delete_doctor' doctor.id %}" role="button">Delete Doctor</a>
+        <p></p>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

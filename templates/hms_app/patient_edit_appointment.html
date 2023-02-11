@@ -1,0 +1,22 @@
+{% extends 'hms_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    {% if edited %}
+    <h1>You've successfully edited your appointment!</h1>
+    {% elif deleted %}
+    <h1>You've deleted your appointment.</h1>
+    {% else %}
+    <h1 class="display-4">Edit Appointment Form</h1>
+    <hr class="my-4">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ appointment_form.as_p }}
+        <input type="submit" value="Edit">
+    </form>
+    <p></p>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'hms_app:delete_appointment' appointment.id %}" role="button">Delete Appointment</a>
+    {% endif %}
+</div>
+{% endblock %}

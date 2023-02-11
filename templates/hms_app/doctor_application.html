@@ -1,0 +1,20 @@
+{% extends 'hms_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    {% if applied %}
+    <h1>Thank you for applying!</h1>
+    {% else %}
+    <h1 class="display-4">Registration for Doctors</h1>
+    <p class="lead">Fill out the necessary fields to apply.</p>
+    <hr class="my-4">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ doctor_form.as_p }}
+        <input type="submit" value="Apply">
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

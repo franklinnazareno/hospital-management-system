@@ -1,0 +1,14 @@
+{% extends 'hms_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    <img src="{{ user.patient.profile_pic.url }}" alt="{{ request.user.username }}'s Profile pic" width="200">
+    <a class="btn btn-outline-primary btn-lg" href="{% url 'hms_app:patient_edit_profile' user.id %}" role="button">Edit Profile</a>
+    <p>Username: {{ request.user.username }}</p>
+    <p>First name: {{ request.user.first_name }}</p>
+    <p>Last name: {{ request.user.last_name }}</p>
+    <p>E-mail: {{ request.user.email }}</p>
+    <p>Sex: {{ request.user.patient.sex }}</p>
+</div>
+{% endblock %}

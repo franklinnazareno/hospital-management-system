@@ -1,0 +1,12 @@
+{% extends 'hms_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron">
+    <img src="{{ patient.profile_pic.url }}" alt="{{ patient.user.username }}'s Profile pic" width="200">
+    <p>First name: {{ patient.user.first_name }}</p>
+    <p>Last name: {{ patient.user.last_name }}</p>
+    <p>E-mail: {{ patient.user.email }}</p>
+    <p>Sex: {{ patient.sex }}</p>
+</div>
+{% endblock %}

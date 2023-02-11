@@ -1,0 +1,169 @@
+{% extends "hms_app/base.html" %}
+{% block body_block %}
+{% load static %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        {% if doctor_status is False %}
+        <h1 class="display-4">Your application is still pending</h1>
+        <p class="lead">Please check your e-mail to check if your application is approved. If you still have not received anything, please e-mail us at hospital_management_system@hms.com.</p>
+        {% elif is_patient %}
+        {% if appointment_list %}
+        <h1 class="display-4">List of appointments</h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Assigned Doctor</th>
+                <th>Appointment Reason</th>
+                <th>Appointment Status</th>
+                <th>Doctor's Remarks</th>
+            </thead>
+            {% for app in appointment_list %}
+            <tr>
+                <td>{% if app.appointment_status %}
+                    {{ app.appointment_date }}
+                    {% else %}
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'hms_app:patient_edit_appointment' app.id %}" role="button">Edit</a> {{ app.appointment_date }}</td>
+                    {% endif %}
+                <td>{{ app.appointment_time }}</td>
+                <td>{% for doc in doctor_list %}
+                    {% if doc.id == app.doctor_id %}
+                    <a href="{% url 'hms_app:view_doctor_profile' doc.id %}">Dr. {{ doc.user.first_name }} {{ doc.user.last_name }}</a> 
+                    {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ app.appointment_reason }}</td>
+                {% if app.appointment_status %}
+                <td> Your scheduled appointment has been approved.</td>
+                {% else %}
+                <td> Your scheduled appointment is still pending for approval.</td>
+                {% endif %}
+                <td>
+                    {% if not app.appointment_comments %}
+                    <div>
+                        None. If you have any concerns, you may send an e-mail at {% for doc in doctor_list %}{%if doc.id == app.doctor_id %}{{ doc.user.email }}{% endif %}{% endfor %}
+                    </div>
+                    {% else %}
+                    <div>
+                        {{ app.appointment_comments }}
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1 class="display-4">You have no upcoming appointments.</h1>
+        <p class="lead">File an appointment now.</p>
+        {% endif %}
+        {% elif is_doctor %}
+        {% if appointment_list %}
+        <h1 class="display-4">List of appointments</h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>Appointment Reason</th>
+                <th>Appointment Status</th>
+                <th>Doctor's Remarks</th>
+            </thead>
+            {% for app in appointment_list %}
+            <tr>
+                <td><a class="btn btn-outline-primary btn-sm" href="{% url 'hms_app:doctor_edit_appointment' app.id %}" role="button">Edit</a> {{ app.appointment_date }}</td>
+                <td>{{ app.appointment_time }}</td>
+                <td>{% for pat in patient_list %}
+                    {% if pat.id == app.patient_id %}
+                    <a href="{% url 'hms_app:view_patient_profile' pat.id %}">{{ pat.user.first_name }} {{ pat.user.last_name }}</a>
+                    {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ app.appointment_reason }}</td>
+                {% if app.appointment_status %}
+                <td> Your scheduled appointment has been approved.</td>
+                {% else %}
+                <td> Your scheduled appointment is still pending for approval.</td>
+                {% endif %}
+                <td>
+                    {% if not app.appointment_comments %}
+                        <div>
+                            None. If you have any concerns, you may send an e-mail at {% for pat in patient_list %}{%if pat.id == app.patient_id %}{{ pat.user.email }}{% endif %}{% endfor %}
+                        </div>
+                    {% else %}
+                        <div>
+                            {{ app.appointment_comments }}
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1 class="display-4">You have no upcoming appointments.</h1>
+        <p class="lead">File an appointment now.</p>
+        {% endif %}
+        {% else %}
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 4</div>
+                <img src="{% static 'home/hospital 3.jpg' %}?{% now 'U' %}" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 4</div>
+                <img src="{% static 'home/hospital 3.jpg' %}?{% now 'U' %}" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 4</div>
+                <img src="{% static 'home/hospital 3.jpg' %}?{% now 'U' %}" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 4</div>
+                <img src="{% static 'home/hospital 3.jpg' %}?{% now 'U' %}" style="width:100%">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+        <script>
+            var slideIndex = 1;
+            showSlides(slideIndex);
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+            function showSlides(n) {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                if (n > slides.length) {
+                    slideIndex = 1
+                }
+                if (n < 1) {
+                    slideIndex = slides.length
+                }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+            }
+        </script>
+        <!-- <h1 class="display-4">Welcome to the Hospital Management System</h1>
+        <p class="lead">Create an appointment with your chosen doctor online!</p> -->
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
