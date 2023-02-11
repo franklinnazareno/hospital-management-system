@@ -1,5 +1,4 @@
 from django import forms
-from datetimepicker.widgets import DateTimePicker
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView
 from . import models
