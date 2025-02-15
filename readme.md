@@ -4,7 +4,7 @@ Welcome to the Hospital Management System project, dedicated to enhancing the pa
 
 ## Demo
 
-[![[DEMO] Django + MySQL Web Application: OK Hospital](https://github.com/user-attachments/assets/2a323df1-8fdc-4a03-a6bd-1f01032c19e2)](https://www.youtube.com/watch?v=EwVCyQYzPI)
+[![[DEMO] Django + MySQL Web Application: OK Hospital](https://github.com/user-attachments/assets/2a323df1-8fdc-4a03-a6bd-1f01032c19e2)](https://www.youtube.com/watch?v=iEwVCyQYzPI)
 
 ## Entity Relationship Diagram (ERD)
 
