@@ -2,6 +2,14 @@
 
 Welcome to the Hospital Management System project, dedicated to enhancing the patient experience and streamlining medical processes.
 
+## Demo
+
+[![[DEMO] Django + MySQL Web Application: OK Hospital](https://github.com/user-attachments/assets/2a323df1-8fdc-4a03-a6bd-1f01032c19e2)](https://www.youtube.com/watch?v=EwVCyQYzPI)
+
+## Entity Relationship Diagram (ERD)
+
+![okHospitalERD](https://github.com/user-attachments/assets/c549a5c6-0f5d-47b0-beff-3a2d6ba5bbd6)
+
 ## Overview
 
 The Hospital Management System is a dynamic project developed around 2020 as part of the "Database Management Systems" course. This system empowers patients to seamlessly schedule appointments with their preferred doctors, ensuring efficient healthcare services.
